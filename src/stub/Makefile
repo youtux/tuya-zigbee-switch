@@ -51,6 +51,7 @@ SOURCES := \
 	$(SRC_DIR)/base_components/network_indicator.c \
 	$(SRC_DIR)/device_config/config_parser.c \
 	$(SRC_DIR)/device_config/config_nv.c \
+	$(SRC_DIR)/device_config/device_params_nv.c \
 	$(SRC_DIR)/device_config/reset.c \
 	$(SRC_DIR)/device_config/nvm_migrations.c \
 	$(SRC_DIR)/zigbee/basic_cluster.c \
@@ -58,6 +59,7 @@ SOURCES := \
 	$(SRC_DIR)/zigbee/switch_cluster.c \
 	$(SRC_DIR)/zigbee/group_cluster.c \
 	$(SRC_DIR)/zigbee/general_commands.c \
+	$(SRC_DIR)/zigbee/cover_switch_cluster.c \
 	$(SRC_DIR)/zigbee/cover_cluster.c
 
 INCLUDES := \
