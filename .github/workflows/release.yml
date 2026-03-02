@@ -78,19 +78,17 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
+          # Switch to main and overwrite with release/tag files
+          git fetch origin main
+          git checkout main
+          git checkout "$TAG" -- zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
+
           # Stage everything: converters, quirks, docs, AND OTA index
           git add -A zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
 
           # Idempotent: skip if nothing changed (e.g. re-run of same tag)
           git diff --cached --quiet && echo "Nothing to commit" && exit 0
 
-          git commit -m "Release $TAG: update converters, quirks, and OTA index"
-
-          # Overwrite main with updated files from the tag
-          git fetch origin main
-          git checkout main
-          git checkout "$TAG" -- zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
-          git add -A zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
           git commit -m "Release $TAG: update converters, quirks, and OTA index"
           git push origin main
 
