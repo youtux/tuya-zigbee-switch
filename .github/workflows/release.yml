@@ -71,20 +71,24 @@ jobs:
           TAG: ${{ github.event.workflow_run.head_branch }}
         run: |
           # Taken from Homebrew package publishing: https://github.com/Homebrew/brew/blob/62c59fa47bbbcf2ee21e90087561c72901f9191f/Library/Homebrew/github_packages.rb#L348
-          ANNOTATIONS=(
-            --annotation "org.opencontainers.image.description=Firmware blob for Zigbee device"
-            --annotation "org.opencontainers.image.title=Zigbee Firmware"
-            --annotation "org.opencontainers.image.source=https://github.com/$REPO"
-            --annotation "org.opencontainers.image.documentation=https://github.com/$REPO/blob/$TAG/readme.md"
-            --annotation "org.opencontainers.image.version=$TAG"
-            --annotation "org.opencontainers.image.ref.name=$TAG"
-            --annotation "com.github.package.type=firmware"
-            --artifact-type "application/octet-stream"
-          )
+          ANNOTATION_FILE=annotations.json
+          cat > "$ANNOTATION_FILE" <<EOF
+          {
+            "org.opencontainers.image.description": "Firmware blob for Zigbee device",
+            "org.opencontainers.image.title": "Zigbee Firmware",
+            "org.opencontainers.image.source": "https://github.com/$REPO",
+            "org.opencontainers.image.documentation": "https://github.com/$REPO/blob/$TAG/readme.md",
+            "org.opencontainers.image.version": "$TAG",
+            "org.opencontainers.image.ref.name": "$TAG",
+            "com.github.package.type": "firmware"
+          }
+          EOF
 
-          parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
-              "oras push {2} {1} ${ANNOTATIONS[@]}" \
+          parallel -v --colsep '\|' --halt soon,fail=1 --jobs 4 \
+            oras push --annotation-file "$ANNOTATION_FILE" --artifact-type "application/octet-stream" {2} {1} \
             :::: oci_push_manifest.txt
+
+          rm -f "$ANNOTATION_FILE"
 
       - name: Commit all generated files
         env:
