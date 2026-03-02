@@ -83,7 +83,7 @@ jobs:
           )
 
           parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
-            "oras push {2} {1} \"${ANNOTATIONS[@]}\"" \
+              "oras push {2} {1} ${ANNOTATIONS[@]}" \
             :::: oci_push_manifest.txt
 
       - name: Commit all generated files
