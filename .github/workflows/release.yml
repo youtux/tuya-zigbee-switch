@@ -68,7 +68,7 @@ jobs:
       - name: Push all firmware to ghcr.io
         run: |
           sudo apt-get -yq install parallel
-          parallel --colsep '\\|' --halt soon,fail=1 --jobs 4 \
+          parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
             'echo "Pushing {1} → {2}" && oras push {2} {1}' \
             :::: oci_push_manifest.txt
 
