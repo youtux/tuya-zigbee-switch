@@ -79,13 +79,18 @@ def board_key_from_dir(board_dir: str, role: str) -> str:
 
 
 def oci_ref(owner: str, repo: str, board_dir: str, tag: str, role: str, variant: str) -> str:
-    """Build the full OCI reference for ``oras push``."""
-    return f"ghcr.io/{owner}/{repo}/{board_dir}:{tag}-{role}-{variant}"
+    """Build the full OCI reference for ``oras push``.
+
+    One ghcr.io package per board (lowercased to satisfy OCI naming).
+    """
+    package = board_dir.lower()
+    return f"ghcr.io/{owner}/{repo}/{package}:{tag}-{role}-{variant}"
 
 
 def blob_url(owner: str, repo: str, board_dir: str, digest: str) -> str:
     """Build the direct ghcr.io blob download URL."""
-    return f"https://ghcr.io/v2/{owner}/{repo}/{board_dir}/blobs/sha256:{digest}"
+    package = board_dir.lower()
+    return f"https://ghcr.io/v2/{owner}/{repo}/{package}/blobs/sha256:{digest}"
 
 
 def index_file_for(role: str, variant: str) -> Path:
