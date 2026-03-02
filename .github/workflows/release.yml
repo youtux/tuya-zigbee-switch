@@ -79,11 +79,11 @@ jobs:
             --annotation "org.opencontainers.image.version=$TAG"
             --annotation "org.opencontainers.image.ref.name=$TAG"
             --annotation "com.github.package.type=firmware"
-            --artifact-type "firmware"
+            --artifact-type "application/octet-stream"
           )
 
           parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
-            "oras push {2} {1}:application/octet-stream \"${ANNOTATIONS[@]}\"" \
+            "oras push {2} {1} \"${ANNOTATIONS[@]}\"" \
             :::: oci_push_manifest.txt
 
       - name: Commit all generated files
