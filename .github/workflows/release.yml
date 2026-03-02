@@ -66,9 +66,23 @@ jobs:
       # ── Side effects (idempotent, applied only after all prep succeeds) ──
 
       - name: Push all firmware to ghcr.io
+        env:
+          REPO: ${{ github.repository }}
+          TAG: ${{ github.event.workflow_run.head_branch }}
         run: |
+          # Taken from Homebrew package publishing: https://github.com/Homebrew/brew/blob/62c59fa47bbbcf2ee21e90087561c72901f9191f/Library/Homebrew/github_packages.rb#L348
+          ANNOTATIONS=(
+            --annotation org.opencontainers.image.description='Firmware blob for Zigbee device'
+            --annotation org.opencontainers.image.title='Zigbee Firmware'
+            --annotation org.opencontainers.image.source="https://github.com/$REPO"
+            --annotation org.opencontainers.image.documentation="https://github.com/$REPO/blob/$TAG/readme.md"
+            --annotation org.opencontainers.image.version="$TAG"
+            --annotation org.opencontainers.image.ref.name="$TAG"
+            --annotation com.github.package.type='firmware'
+          )
+
           parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
-            'echo "Pushing {1} → {2}" && oras push {2} {1}' \
+            "oras push {2} {1}:application/octet-stream \"${ANNOTATIONS[@]}\"" \
             :::: oci_push_manifest.txt
 
       - name: Commit all generated files
