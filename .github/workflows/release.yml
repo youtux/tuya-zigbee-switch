@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_branch }}
 
       - name: Download build outputs
         uses: actions/download-artifact@v4
@@ -67,7 +67,6 @@ jobs:
 
       - name: Push all firmware to ghcr.io
         run: |
-          sudo apt-get -yq install parallel
           parallel --colsep '\|' --halt soon,fail=1 --jobs 4 \
             'echo "Pushing {1} → {2}" && oras push {2} {1}' \
             :::: oci_push_manifest.txt
@@ -79,17 +78,21 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-          # Pull latest in case a previous partial run already committed
-          git pull --rebase origin main
-
           # Stage everything: converters, quirks, docs, AND OTA index
-          git add zha/* homed/* docs/supported_devices.md
-          git add zigbee2mqtt/converters/* zigbee2mqtt/converters_v1/*
-          git add zigbee2mqtt/ota/*
+          git add -A zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
 
           # Idempotent: skip if nothing changed (e.g. re-run of same tag)
-          git diff --cached --quiet || git commit -m "Release $TAG: update converters, quirks, and OTA index"
-          git push origin HEAD:main
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+
+          git commit -m "Release $TAG: update converters, quirks, and OTA index"
+
+          # Overwrite main with updated files from the tag
+          git fetch origin main
+          git checkout main
+          git checkout "$TAG" -- zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
+          git add -A zha/ homed/ docs/supported_devices.md zigbee2mqtt/converters/ zigbee2mqtt/converters_v1/ zigbee2mqtt/ota/
+          git commit -m "Release $TAG: update converters, quirks, and OTA index"
+          git push origin main
 
       - name: Create GitHub Release
         env:
