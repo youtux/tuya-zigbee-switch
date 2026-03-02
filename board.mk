@@ -94,7 +94,7 @@ Z2M_INDEX_FILE := zigbee2mqtt/ota/index_$(DEVICE_TYPE).json
 Z2M_FORCE_INDEX_FILE := zigbee2mqtt/ota/index_$(DEVICE_TYPE)-FORCE.json
 
 # Main target - builds firmware and generates all OTA files
-build: drop-old-files build-firmware generate-ota-files update-indexes
+build: drop-old-files build-firmware generate-ota-files
 
 # Build the firmware for the specified board
 build-firmware:
@@ -154,22 +154,10 @@ generate-force-ota:
 		OTA_IMAGE_TYPE=$(FIRMWARE_IMAGE_TYPE) \
 		OTA_FILE=../../$(FORCE_OTA_FILE)
 
-# Update Zigbee2MQTT index files
-update-indexes:
-	@python3 $(HELPERS_PATH)/make_z2m_ota_index.py --db_file $(DEVICE_DB_FILE) $(OTA_FILE) $(Z2M_INDEX_FILE) --board $(BOARD)
-ifneq ($(PLATFORM_PREFIX),silabs)  # Silabs platform does not support Tuya migration OTAs
-ifneq ($(FROM_STOCK_MANUFACTURER_ID),null)
-ifneq ($(FROM_STOCK_IMAGE_TYPE),null)
-	@python3 $(HELPERS_PATH)/make_z2m_ota_index.py --db_file $(DEVICE_DB_FILE) $(FROM_TUYA_OTA_FILE) $(Z2M_INDEX_FILE) --board $(BOARD)
-endif
-endif
-endif
-	@python3 $(HELPERS_PATH)/make_z2m_ota_index.py --db_file $(DEVICE_DB_FILE) $(FORCE_OTA_FILE) $(Z2M_FORCE_INDEX_FILE) --board $(BOARD)
-
 
 flash_telink: build-firmware
 	@echo "Flashing $(BIN_FILE) to device via $(TLSRPGM_TTY)"
 	$(MAKE) telink/flasher ARGS="-t25 -a 20 --mrst we 0 ../../$(BIN_FILE)"
 
-.PHONY: help build build-firmware drop-old-files generate-ota-files generate-normal-ota generate-tuya-ota generate-force-ota update-indexes clean_z2m_index update_converters update_zha_quirk update_homed_extension update_supported_devices freeze_ota_links
+.PHONY: help build build-firmware drop-old-files generate-ota-files generate-normal-ota generate-tuya-ota generate-force-ota clean_z2m_index update_converters update_zha_quirk update_homed_extension update_supported_devices freeze_ota_links
 

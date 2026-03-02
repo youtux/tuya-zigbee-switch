@@ -13,3 +13,6 @@ __pycache__
 *.pyc
 *.pyo
 *.pyd
+
+bin/router/
+bin/end_device/
