@@ -67,10 +67,10 @@ jobs:
 
       - name: Push all firmware to ghcr.io
         run: |
-          while IFS='|' read -r ZIGBEE_FILE OCI_REF; do
-            echo "Pushing $ZIGBEE_FILE → $OCI_REF"
-            oras push "$OCI_REF" "$ZIGBEE_FILE"
-          done < oci_push_manifest.txt
+          sudo apt-get -yq install parallel
+          parallel --colsep '\\|' --halt soon,fail=1 --jobs 4 \
+            'echo "Pushing {1} → {2}" && oras push {2} {1}' \
+            :::: oci_push_manifest.txt
 
       - name: Commit all generated files
         env:

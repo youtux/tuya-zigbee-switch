@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -78,18 +79,30 @@ def board_key_from_dir(board_dir: str, role: str) -> str:
     return board_dir
 
 
+def _sanitize_package(board_dir: str) -> str:
+    """Convert a board directory name to a valid OCI package name.
+
+    OCI repository names must be lowercase and only allow ``_``, ``__``,
+    ``-``, or ``.`` as separators between alphanumeric segments.  Board
+    names like ``PLUG___AUBESS_PM_TS011F`` contain triple underscores
+    which are invalid.  We lowercase and replace every run of
+    underscores with a single hyphen.
+    """
+    return re.sub(r"_+", "-", board_dir.lower())
+
+
 def oci_ref(owner: str, repo: str, board_dir: str, tag: str, role: str, variant: str) -> str:
     """Build the full OCI reference for ``oras push``.
 
-    One ghcr.io package per board (lowercased to satisfy OCI naming).
+    One ghcr.io package per board, name sanitised for OCI compliance.
     """
-    package = board_dir.lower()
+    package = _sanitize_package(board_dir)
     return f"ghcr.io/{owner}/{repo}/{package}:{tag}-{role}-{variant}"
 
 
 def blob_url(owner: str, repo: str, board_dir: str, digest: str) -> str:
     """Build the direct ghcr.io blob download URL."""
-    package = board_dir.lower()
+    package = _sanitize_package(board_dir)
     return f"https://ghcr.io/v2/{owner}/{repo}/{package}/blobs/sha256:{digest}"
 
 
