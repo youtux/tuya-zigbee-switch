@@ -57,38 +57,18 @@ jobs:
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
         run: |
-          source .venv/bin/activate
           python3 helper_scripts/prepare_release.py \
             --tag "$TAG" --owner "$OWNER" --repo "$REPO" \
             --db-file device_db.yaml \
-            --manifest oci_push_manifest.txt
+            --manifest oci_push_manifest.txt \
+            --annotations annotations.json \
+            --index-files \
+              zigbee2mqtt/ota/index_router.json \
+              zigbee2mqtt/ota/index_router-FORCE.json \
+              zigbee2mqtt/ota/index_end_device.json \
+              zigbee2mqtt/ota/index_end_device-FORCE.json
 
-      # ── Side effects (idempotent, applied only after all prep succeeds) ──
-
-      - name: Push all firmware to ghcr.io
-        env:
-          REPO: ${{ github.repository }}
-          TAG: ${{ github.event.workflow_run.head_branch }}
-        run: |
-          # Taken from Homebrew package publishing: https://github.com/Homebrew/brew/blob/62c59fa47bbbcf2ee21e90087561c72901f9191f/Library/Homebrew/github_packages.rb#L348
-          ANNOTATION_FILE=annotations.json
-          cat > "$ANNOTATION_FILE" <<EOF
-          {
-            "org.opencontainers.image.description": "Firmware blob for Zigbee device",
-            "org.opencontainers.image.title": "Zigbee Firmware",
-            "org.opencontainers.image.source": "https://github.com/$REPO",
-            "org.opencontainers.image.documentation": "https://github.com/$REPO/blob/$TAG/readme.md",
-            "org.opencontainers.image.version": "$TAG",
-            "org.opencontainers.image.ref.name": "$TAG",
-            "com.github.package.type": "firmware"
-          }
-          EOF
-
-          parallel -v --colsep '\|' --halt soon,fail=1 --jobs 4 \
-            oras push --annotation-file "$ANNOTATION_FILE" --artifact-type "application/octet-stream" {2} {1} \
-            :::: oci_push_manifest.txt
-
-          rm -f "$ANNOTATION_FILE"
+          helper_scripts/oras_push_all.sh -m oci_push_manifest.txt -a annotations.json -r "$REPO" -t "$TAG"
 
       - name: Commit all generated files
         env:
