@@ -150,6 +150,17 @@ const romasku = {
             access: "ALL",
             entityCategory: "config",
         }),
+    multiPressResetCount: (name, endpointName) =>
+        numeric({
+            name,
+            endpointNames: [endpointName],
+            cluster: "genBasic",
+            attribute: { ID: 0xff02, type: 0x20 }, // uint8
+            description: "Number of consecutive presses to trigger factory reset (0 = disabled)",
+            valueMin: 0,
+            valueMax: 255,
+            entityCategory: "config",
+        }),
     deviceConfig: (name, endpointName) =>
         text({
             name,
@@ -330,6 +341,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -451,6 +463,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -572,6 +585,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -693,6 +707,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -739,6 +754,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -810,6 +826,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -867,6 +884,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -913,6 +931,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -984,6 +1003,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1080,6 +1100,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -1203,6 +1224,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -1251,6 +1273,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1324,6 +1347,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1422,6 +1446,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -1543,6 +1568,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1639,6 +1665,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -1760,6 +1787,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -1807,6 +1835,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -1854,6 +1883,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1925,6 +1955,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -1996,6 +2027,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2092,6 +2124,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2163,6 +2196,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2234,6 +2268,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -2280,6 +2315,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2351,6 +2387,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2423,6 +2460,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -2470,6 +2508,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2566,6 +2605,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -2612,6 +2652,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2683,6 +2724,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -2730,6 +2772,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -2822,6 +2865,7 @@ const definitions = [
             }),
             deviceEndpoints({ endpoints: {"cover_switch": 1, "cover": 2, } }),
             romasku.deviceConfig("device_config", "cover_switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "cover_switch"),
             romasku.networkIndicator("network_led", "cover_switch"),
             windowCovering({ 
                 controls: ["lift"],
@@ -2898,6 +2942,7 @@ const definitions = [
             }),
             deviceEndpoints({ endpoints: {"cover_switch_left": 1, "cover_switch_right": 2, "cover_left": 3, "cover_right": 4, } }),
             romasku.deviceConfig("device_config", "cover_switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "cover_switch_left"),
             romasku.networkIndicator("network_led", "cover_switch_left"),
             windowCovering({ 
                 controls: ["lift"],
@@ -2988,6 +3033,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3080,6 +3126,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3126,6 +3173,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3172,6 +3220,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3218,6 +3267,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3265,6 +3315,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -3361,6 +3412,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -3482,6 +3534,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3528,6 +3581,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -3574,6 +3628,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -3645,6 +3700,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -3740,6 +3796,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -3811,6 +3868,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -3907,6 +3965,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -4028,6 +4087,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4074,6 +4134,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4120,6 +4181,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4166,6 +4228,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4212,6 +4275,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -4283,6 +4347,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4329,6 +4394,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4375,6 +4441,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4467,6 +4534,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4513,6 +4581,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4561,6 +4630,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -4633,6 +4703,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -4729,6 +4800,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4775,6 +4847,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4821,6 +4894,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -4892,6 +4966,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -4938,6 +5013,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -5009,6 +5085,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5055,6 +5132,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -5147,6 +5225,7 @@ const definitions = [
             }),
             deviceEndpoints({ endpoints: {"cover_switch": 1, "cover": 2, } }),
             romasku.deviceConfig("device_config", "cover_switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "cover_switch"),
             romasku.networkIndicator("network_led", "cover_switch"),
             windowCovering({ 
                 controls: ["lift"],
@@ -5202,6 +5281,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5248,6 +5328,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -5319,6 +5400,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -5390,6 +5472,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5436,6 +5519,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5482,6 +5566,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5528,6 +5613,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -5649,6 +5735,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -5720,6 +5807,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5776,6 +5864,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -5832,6 +5921,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
             romasku.switchMode("switch_mode", "switch"),
@@ -5887,6 +5977,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -6008,6 +6099,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -6054,6 +6146,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6126,6 +6219,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6222,6 +6316,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -6344,6 +6439,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -6401,6 +6497,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6493,6 +6590,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6589,6 +6687,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -6647,6 +6746,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6739,6 +6839,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -6865,6 +6966,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -6912,6 +7014,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7009,6 +7112,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -7130,6 +7234,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -7186,6 +7291,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7267,6 +7373,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -7324,6 +7431,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7415,6 +7523,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7506,6 +7615,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7632,6 +7742,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -7688,6 +7799,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7779,6 +7891,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -7906,6 +8019,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -8067,6 +8181,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
             romasku.switchMode("switch_mode", "switch"),
@@ -8122,6 +8237,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -8168,6 +8284,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -8239,6 +8356,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -8335,6 +8453,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -8381,6 +8500,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -8452,6 +8572,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -8548,6 +8669,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -8638,6 +8760,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -8763,6 +8886,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
             romasku.switchMode("switch_mode", "switch"),
@@ -8818,6 +8942,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -8908,6 +9033,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -9033,6 +9159,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
             romasku.switchMode("switch_mode", "switch"),
@@ -9088,6 +9215,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -9178,6 +9306,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -9304,6 +9433,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
             romasku.switchMode("switch_mode", "switch"),
@@ -9360,6 +9490,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -9451,6 +9582,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_middle": 2, "switch_right": 3, "relay_left": 4, "relay_middle": 5, "relay_right": 6, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_middle", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
@@ -9576,6 +9708,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
             romasku.switchMode("switch_0_mode", "switch_0"),
@@ -9736,6 +9869,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
             romasku.switchMode("switch_0_mode", "switch_0"),
@@ -9897,6 +10031,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -9954,6 +10089,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             romasku.networkIndicator("network_led", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
@@ -10171,6 +10307,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch": 1, "relay": 2, } }),
             romasku.deviceConfig("device_config", "switch"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch"),
             romasku.networkIndicator("network_led", "switch"),
             onOff({ endpointNames: ["relay"] }),
             romasku.pressAction("switch_press_action", "switch"),
@@ -10217,6 +10354,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_0": 1, "switch_1": 2, "switch_2": 3, "switch_3": 4, "relay_0": 5, "relay_1": 6, "relay_2": 7, "relay_3": 8, } }),
             romasku.deviceConfig("device_config", "switch_0"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_0"),
             romasku.networkIndicator("network_led", "switch_0"),
             onOff({ endpointNames: ["relay_0", "relay_1", "relay_2", "relay_3"] }),
             romasku.pressAction("switch_0_press_action", "switch_0"),
@@ -10339,6 +10477,7 @@ const definitions = [
         extend: [
             deviceEndpoints({ endpoints: {"switch_left": 1, "switch_right": 2, "relay_left": 3, "relay_right": 4, } }),
             romasku.deviceConfig("device_config", "switch_left"),
+            romasku.multiPressResetCount("multi_press_reset_count", "switch_left"),
             onOff({ endpointNames: ["relay_left", "relay_right"] }),
             romasku.pressAction("switch_left_press_action", "switch_left"),
             romasku.switchMode("switch_left_mode", "switch_left"),
